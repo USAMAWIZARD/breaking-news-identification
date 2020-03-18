@@ -16,16 +16,17 @@ def mostcommonwordnews():
 	global titleofallnews
 	for newsheadline in titleofallnews:
 		for word in newsheadline:
-			mostrep[word]+=1
-	print(mostrep) 
-  
+			mostrep[word.lower()]+=1
+			
+
+	print({k: v for k, v in sorted(mostrep.items(), key=lambda item: item[1])})
 for news in aljazeera.entries+bbc.entries+cnn.entries+cnbcworld.entries+cnbctop.entries	:
 
 	wordtokenized=word_tokenize(news.title)
 	stop_word_removed_sentence = [w for w in wordtokenized if not w in stop_words]
 	sentence_without_puct=tokenizer.tokenize(str(stop_word_removed_sentence)  )
 	for word in sentence_without_puct:
-		mostrep[word]=0
+		mostrep[word.lower()]=0
 	titleofallnews.append(sentence_without_puct)
 mostcommonwordnews()
 #print(titleofallnews)
